@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Promodoro Timer",
+    "version": "1.0.0",
+    "description": "Helps you get things done",
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+    "action": {
+        "default_icon": "icon.png",
+        "default_title": "Promodoro Timer",
+        "default_popup": "popup/popup.html"
+    }
+}
