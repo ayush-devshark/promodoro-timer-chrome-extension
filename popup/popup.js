@@ -4,6 +4,21 @@ const taskContainer = document.getElementById('task-container');
 
 let tasks = [];
 
+startTimerBtn.addEventListener('click', () => {
+    chrome.storage.local.get(['isRunning'], res => {
+        chrome.storage.local.set(
+            {
+                isRunning: !res.isRunning,
+            },
+            () => {
+                startTimerBtn.textContent = !res.isRunning
+                    ? 'Pause Timer'
+                    : 'Start Timer';
+            }
+        );
+    });
+});
+
 chrome.storage.local.get(['tasks'], res => {
     tasks = res.tasks ? res.tasks : [];
     renderTasks();
@@ -19,6 +34,7 @@ const addTask = () => {
     const taskNum = tasks.length;
     tasks.push('');
     rendertask(taskNum);
+    saveTasks();
 };
 
 const rendertask = taskNum => {
@@ -49,6 +65,7 @@ const rendertask = taskNum => {
 const deleteTask = taskNum => {
     tasks.splice(taskNum, 1);
     renderTasks();
+    saveTasks();
 };
 
 function renderTasks() {
