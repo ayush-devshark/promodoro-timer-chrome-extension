@@ -1,4 +1,5 @@
 const startTimerBtn = document.getElementById('startBtn');
+const resetTimerBtn = document.getElementById('resetBtn');
 const addTaskBtn = document.getElementById('addBtn');
 const taskContainer = document.getElementById('task-container');
 
@@ -17,6 +18,18 @@ startTimerBtn.addEventListener('click', () => {
             }
         );
     });
+});
+
+resetTimerBtn.addEventListener('click', () => {
+    chrome.storage.local.set(
+        {
+            timer: 0,
+            isRunning: false,
+        },
+        () => {
+            startTimerBtn.textContent = 'Start Timer';
+        }
+    );
 });
 
 chrome.storage.local.get(['tasks'], res => {
