@@ -5,8 +5,16 @@ chrome.alarms.onAlarm.addListener(alarm => {
         chrome.storage.local.get(['timer', 'isRunning'], res => {
             if (res.isRunning) {
                 let timer = res.timer + 1;
-                console.log(timer);
-                chrome.storage.local.set({ timer });
+                let isRunning = true;
+                if (timer === 25 * 60) {
+                    this.registration.showNotification('Promodoro Timer', {
+                        body: '25 Minutes has passed!',
+                        icon: 'icon.png',
+                    });
+                    timer = 0;
+                    isRunning = false;
+                }
+                chrome.storage.local.set({ timer, isRunning });
             }
         });
     }
