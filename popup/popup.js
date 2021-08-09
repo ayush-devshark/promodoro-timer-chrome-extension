@@ -2,8 +2,23 @@ const startTimerBtn = document.getElementById('startBtn');
 const resetTimerBtn = document.getElementById('resetBtn');
 const addTaskBtn = document.getElementById('addBtn');
 const taskContainer = document.getElementById('task-container');
+const time = document.getElementById('time');
 
 let tasks = [];
+
+function updateTime() {
+    chrome.storage.local.get(['timer'], res => {
+        const minutes = `${25 - Math.ceil(res.timer / 60)}`.padStart(2, '0');
+        let seconds = '00';
+        if (res.timer % 60 !== 0) {
+            seconds = `${60 - (res.timer % 60)}`.padStart(2, '0');
+        }
+        time.textContent = `${minutes}: ${seconds}`;
+    });
+}
+
+updateTime();
+setInterval(updateTime, 1000);
 
 startTimerBtn.addEventListener('click', () => {
     chrome.storage.local.get(['isRunning'], res => {
