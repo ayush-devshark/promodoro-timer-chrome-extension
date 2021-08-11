@@ -7,8 +7,10 @@ const time = document.getElementById('time');
 let tasks = [];
 
 function updateTime() {
-    chrome.storage.local.get(['timer'], res => {
-        const minutes = `${25 - Math.ceil(res.timer / 60)}`.padStart(2, '0');
+    chrome.storage.local.get(['timer', 'timerOptions'], res => {
+        const minutes = `${
+            res.timerOptions - Math.ceil(res.timer / 60)
+        }`.padStart(2, '0');
         let seconds = '00';
         if (res.timer % 60 !== 0) {
             seconds = `${60 - (res.timer % 60)}`.padStart(2, '0');
