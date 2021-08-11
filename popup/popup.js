@@ -74,6 +74,7 @@ const rendertask = taskNum => {
     taskTextEL.type = 'text';
     taskTextEL.placeholder = 'Enter a task...';
     taskTextEL.value = tasks[taskNum];
+    taskTextEL.className = 'task-input';
     taskTextEL.addEventListener('change', () => {
         tasks[taskNum] = taskTextEL.value;
         saveTasks();
@@ -82,6 +83,7 @@ const rendertask = taskNum => {
     const deleteTaskBtn = document.createElement('input');
     deleteTaskBtn.type = 'button';
     deleteTaskBtn.value = 'x';
+    deleteTaskBtn.className = 'task-delete';
     deleteTaskBtn.addEventListener('click', () => {
         deleteTask(taskNum);
     });
